@@ -19,18 +19,19 @@ input="""1224   926 1380    688 845 109 118 88  1275    1306    91  796 102 1361
 
 lines=input.splitlines()
 
-sum=0
+sum1=0
+sum2=0
 for line in lines:
-    vals = line.split()
-    low=None
-    high=None
-    for v in vals:
-        v=int(v)
-        if v < low or low is None:
-            low=v
-        if v > high or high is None:
-            high=v
-    diff=high-low
-    sum += diff
+    vals = [int(x) for x in line.split()]
+    low = min(vals)
+    high = max(vals)
+    sum1 += high - low
 
-print sum
+    for v in vals:
+        modulo = [v / x for x in vals if v != x and v % x == 0]
+        if modulo:
+            break
+    sum2 += modulo[0]
+
+print sum1
+print sum2
